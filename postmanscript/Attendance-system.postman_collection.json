@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "e3d18690-487b-40d0-8e11-64642181da4e",
+		"name": "Attendance-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14752862",
+		"_collection_link": "https://rose-team.postman.co/workspace/grayFalcon~032e7919-14b6-4d4f-9f11-75fad8c2e9b4/collection/14752862-e3d18690-487b-40d0-8e11-64642181da4e?action=share&source=collection_link&creator=14752862"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    let response = JSON.parse(responseBody);",
+									"    pm.globals.set(\"token\", response.data.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"instructor@gmail.com\",\n    \"password\":\"Admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  loged-in user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"Admin@123\",\n    \"newPassword\": \"Admin@1234\",\n    \"reNewPassword\": \"Admin@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/auth/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manage-attendance",
+			"item": [
+				{
+					"name": "Add check-In/Out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"checkInTime\":\"2024-02-18T14:51:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/attendance/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"attendance",
+								"add"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Check-in",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"checkInTime\":\"2024-02-18T14:51:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/v1/attendance-system/attendance/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"v1",
+										"attendance-system",
+										"attendance",
+										"add"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-GnQi2/hdNr34l3PB8u6cMFq2lcc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:29:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Check-out successfully\",\n    \"data\": {\n        \"acknowledged\": true,\n        \"modifiedCount\": 1,\n        \"upsertedId\": null,\n        \"upsertedCount\": 0,\n        \"matchedCount\": 1\n    },\n    \"errorCode\": null,\n    \"responseTime\": \"26 MS\"\n}"
+						},
+						{
+							"name": "check-out",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"checkOutTime\":\"2024-02-18T14:51:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/v1/attendance-system/attendance/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"v1",
+										"attendance-system",
+										"attendance",
+										"add"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-GnQi2/hdNr34l3PB8u6cMFq2lcc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Feb 2024 00:29:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"Check-out successfully\",\n    \"data\": {\n        \"acknowledged\": true,\n        \"modifiedCount\": 1,\n        \"upsertedId\": null,\n        \"upsertedCount\": 0,\n        \"matchedCount\": 1\n    },\n    \"errorCode\": null,\n    \"responseTime\": \"26 MS\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Find check-in info of all instructors by month",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"year\":\"2024\",\n    \"month\":\"02\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/attendance/find-check-in-info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"attendance",
+								"find-check-in-info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Sign-up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"test-name\",\n    \"email\":\"test@gmail.com\",\n    \"phone\":\"8756436457\",\n    \"password\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/user/sign-up",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"user",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"name\":\"test-name-u\",\n    \"email\":\"test@gmail.com-u\",\n    \"phone\":\"87564364570\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/user/update/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"user",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65d2839d8feaafefb286190f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/user/find",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"user",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One by document Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/user/find-one/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"user",
+								"find-one",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65d2839d8feaafefb286190f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/v1/attendance-system/user/delete-one/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"v1",
+								"attendance-system",
+								"user",
+								"delete-one",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65d2839d8feaafefb286190f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
